@@ -189,7 +189,7 @@ export class SiswaService {
 
       console.log(headers)
 
-      let rows: Prisma.SiswaCreateInput[] = []
+      let rows: Prisma.SiswaCreateManyInput[] = []
       worksheet.eachRow((row, rowNumber) => {
          if (rowNumber === 1) return
          const values = parseRowToStrings(row.values as CellValue[])
@@ -270,36 +270,12 @@ export class SiswaService {
             nama: validData.siswa_nama,
             nisn: validData.nisn,
             nik: validData.nik,
-            provinsi: {
-               connect: {
-                  provinsi_id: wilayah!.provinsi_id
-               }
-            },
-            kabupaten: {
-               connect: {
-                  kabupaten_id: wilayah!.kabupaten_id
-               }
-            },
-            kecamatan: {
-               connect: {
-                  kecamatan_id: wilayah!.kecamatan_id
-               }
-            },
-            desa: {
-               connect: {
-                  desa_id: wilayah!.desa_id
-               }
-            },
-            banjar: {
-               connect: {
-                  banjar_id: wilayah!.banjar_id
-               }
-            },
-            m_agama: {
-               connect: {
-                  agama_id: agamaValue
-               }
-            },
+            provinsi_id: wilayah!.provinsi_id,
+            kabupaten_id: wilayah!.kabupaten_id,
+            kecamatan_id: wilayah!.kecamatan_id,
+            desa_id: wilayah!.desa_id,
+            banjar_id: wilayah!.banjar_id,
+            agama_id: agamaValue,
             tempat_lahir: tempat_lahir?.toString().trim() || "",
             tanggal_lahir: tanggal_lahir ? new Date(tanggal_lahir.toString().trim()) : "",
             jenis_kelamin: jenis_kelamin?.toString().trim() as JenisKelamin,
